@@ -557,4 +557,3 @@ function supersized_filefield_sources_widgets() {
   // Add any widgets that your module supports here.
   return array('supersized_slide');
 }
-

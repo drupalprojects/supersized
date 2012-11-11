@@ -33,7 +33,7 @@ class supersized_context_condition extends context_condition {
       if ($plugin = context_get_plugin('reaction', 'am_billboard')) {
         $node = node_load($plugin->execute());
       }
-      // Get node by page
+      // Get node by page.
       if (empty($node)) {
         if (arg(2) !== 'edit') {
           $node = menu_get_object();

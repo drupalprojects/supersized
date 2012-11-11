@@ -1,12 +1,12 @@
 #thumb-tray {
   height: 130px;
 }
-ul#thumb-list li img {
-  width: auto;
-}
 ul#thumb-list li {
   background: transparent;
   height: 60px;
   width: 60px;
   padding: 10px;
+}
+ul#thumb-list li img {
+  width: auto;
 }

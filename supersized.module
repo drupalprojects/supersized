@@ -109,7 +109,7 @@ function supersized_image_default_styles() {
         ),
         'weight' => '-9',
       ),
-    )
+    ),
   );
 
   $styles['supersized-thumbnail'] = array(
@@ -224,7 +224,7 @@ function supersized_run_supersized($node, &$page) {
   // Construct image objects.
   $images = array();
   foreach ($items as $key => $item) {
-    $image = new stdClass;
+    $image = new stdClass();
     if (!empty($item['title'])) {
       $image->title = $item['title'];
     }
@@ -236,7 +236,7 @@ function supersized_run_supersized($node, &$page) {
     }
     $image->thumb = image_style_url($instance['widget']['settings']['preview_image_style'], $item['uri']);
     if (isset($instance['display']['full'])) {
-      if ( isset($instance['display']['full']['settings']['image_style']) && !empty($instance['display']['full']['settings']['image_style']) ) {
+      if (isset($instance['display']['full']['settings']['image_style']) && !empty($instance['display']['full']['settings']['image_style'])) {
         $image->image = image_style_url($instance['display']['full']['settings']['image_style'], $item['uri']);
       }
       else {
@@ -402,6 +402,9 @@ function supersized_admin_paths() {
   }
 }
 
+/**
+ * Supersized setting form for node.
+ */
 function supersized_node_settings_form($form, &$form_state, $node) {
 
   $settings = supersized_get_node_settings($node);
@@ -707,8 +710,9 @@ function supersized_get_node_settings($node) {
   return array();
 }
 
+/**
+ * An access check helper function.
+ */
 function supersized_node_settings_access($node) {
   return user_access('administer node supersized settings') && supersized_get_supersized_field($node);
 }
-
-
