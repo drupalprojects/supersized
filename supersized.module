@@ -54,9 +54,9 @@ function theme_supersized_thumb_links() {
  * Theme fuction for control_bar.
  */
 function theme_supersized_control_bar() {
-  $pause_path = drupal_get_path('module', 'supersized').'/js/supersized/slideshow/img/pause.png';
+  $pause_path = drupal_get_path('module', 'supersized') . '/js/supersized/slideshow/img/pause.png';
   $pause_attr = array('id' => 'pauseplay');
-  $tray_button_path = drupal_get_path('module', 'supersized').'/js/supersized/slideshow/img/button-tray-up.png';
+  $tray_button_path = drupal_get_path('module', 'supersized') . '/js/supersized/slideshow/img/button-tray-up.png';
   $tray_button_attr = array('id' => 'tray-arrow');
   return '<div id="controls-wrapper" class="load-item">
     <div id="controls">
