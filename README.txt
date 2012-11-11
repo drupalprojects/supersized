@@ -65,3 +65,17 @@ theme_supersized_control_bar()
 The default them comes with Supersized JQuery plugin supports 'image_path'. The
 default path would be /js/supersized/slideshow/img, however, if your theme has 
 /images/supersized/ this folder, images will be crab from this folder instead.
+
+AFTER SLIDE CALLBACK
+--------------------
+Define a js function and name it `supersized_slide_callback`.  This function
+will be called after each slides.
+
+/**
+ * Supersized slide callback function.
+ */
+function am_billboard_slide_callback() {
+  var title = api.getField('title');
+  var body = api.getField('body');
+  // Do something with the slide title and body...
+}
