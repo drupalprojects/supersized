@@ -5,8 +5,9 @@
  *
  * To apply Suersized.
  */
+
 class supersized_context_reaction extends context_reaction {
-  
+
   /**
    * Construct option form.
    */
@@ -22,17 +23,17 @@ class supersized_context_reaction extends context_reaction {
       '#default_value' => $values ? $values['nid'] : NULL,
       '#description' => t('Slides of the content will be used as the supersized.'),
     );
-    
+
     return $form;
   }
-  
+
   /**
    * See if context contains redirect reaction.
    */
-  function execute() { 
+  function execute() {
     $contexts = context_active_contexts();
     foreach ($contexts as $context) {
-      if (!empty($context->reactions[$this->plugin])) {        
+      if (!empty($context->reactions[$this->plugin])) {
         preg_match('/\[nid: (\d+)\]$/', $context->reactions[$this->plugin]['nid'], $matches);
         $nid = $matches[1];
         return $nid;

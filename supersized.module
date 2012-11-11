@@ -9,7 +9,7 @@
 require_once drupal_get_path('module', 'supersized') . '/supersized.field.inc';
 
 /**
- * Implement hook_theme().
+ * Implements hook_theme().
  */
 function supersized_theme($existing, $type, $theme, $path) {
   return array(
@@ -40,7 +40,7 @@ function theme_supersized_progress_bar() {
  * Theme fuction for thumbnail_navigation.
  */
 function theme_supersized_thumbnail_navigation() {
-  return '<div id="prevthumb"></div><div id="nextthumb"></div>';  
+  return '<div id="prevthumb"></div><div id="nextthumb"></div>';
 }
 
 /**
@@ -60,23 +60,23 @@ function theme_supersized_control_bar() {
   $tray_button_attr = array('id' => 'tray-arrow');
   return '<div id="controls-wrapper" class="load-item">
     <div id="controls">
-      
+
       <a id="play-button">' . theme('image', array('path' => $pause_path, 'attributes' => $pause_attr)) . '</a>
-    
+
       <!--Slide counter-->
       <div id="slidecounter">
         <span class="slidenumber"></span> / <span class="totalslides"></span>
       </div>
-      
+
       <!--Slide captions displayed here-->
       <div id="slidecaption"></div>
-      
+
       <!--Thumb Tray button-->
       <a id="tray-button">' . theme('image', array('path' => $tray_button_path, 'attributes' => $tray_button_attr)) . '</a>
-      
+
       <!--Navigation-->
       <ul id="slide-list"></ul>
-      
+
     </div>
   </div>';
 }
@@ -175,9 +175,9 @@ function supersized_image_default_styles() {
 }
 
 /**
- * Implement hook_page_alter().
+ * Implements hook_page_alter().
  */
-function supersized_page_alter(&$page) { 
+function supersized_page_alter(&$page) {
 
   $node = NULL;
 
@@ -186,7 +186,7 @@ function supersized_page_alter(&$page) {
     $node = node_load($plugin->execute());
   }
 
-  // Get node by page
+  // Get node by page.
   if (empty($node)) {
     if (arg(0) == 'node' && is_numeric(arg(1))) {
       $mode = arg(2);
@@ -195,11 +195,11 @@ function supersized_page_alter(&$page) {
       }
     }
   }
-  
+
   // If there's a node defined, try to run supersized.
   if (!empty($node)) {
     supersized_run_supersized($node, $page);
-  }  
+  }
 }
 
 /**
@@ -221,7 +221,7 @@ function supersized_run_supersized($node, &$page) {
     return;
   }
 
-  // Construct image objects
+  // Construct image objects.
   $images = array();
   foreach ($items as $key => $item) {
     $image = new stdClass;
@@ -240,7 +240,7 @@ function supersized_run_supersized($node, &$page) {
         $image->image = image_style_url($instance['display']['full']['settings']['image_style'], $item['uri']);
       }
       else {
-        $image->image = file_create_url($item['uri']); 
+        $image->image = file_create_url($item['uri']);
       }
     }
     else {
@@ -248,9 +248,9 @@ function supersized_run_supersized($node, &$page) {
         $image->image = image_style_url($instance['display']['default']['settings']['image_style'], $item['uri']);
       }
       else {
-        $image->image = file_create_url($item['uri']); 
+        $image->image = file_create_url($item['uri']);
       }
-    }    
+    }
     $images[] = $image;
   }
 
@@ -268,7 +268,7 @@ function supersized_run_supersized($node, &$page) {
   drupal_add_js(drupal_get_path('module', 'supersized') . '/js/supersized/slideshow/theme/supersized.shutter.min.js');
   drupal_add_js(drupal_get_path('module', 'supersized') . '/js/supersized.js');
 
-  drupal_add_css(drupal_get_path('module', 'supersized') . '/css/supersized-default.css');  
+  drupal_add_css(drupal_get_path('module', 'supersized') . '/css/supersized-default.css');
   drupal_add_js(array(
     'supersized' => array(
       'autoplay' => $settings['functionalities']['autoplay'],
@@ -306,9 +306,9 @@ function supersized_run_supersized($node, &$page) {
     $page['page_bottom']['supersized']['arrow_nav'] = array(
       '#type' => 'markup',
       '#markup' => theme('supersized_arrow_nav'),
-    );    
+    );
   }
-  
+
   // Add progress bar.
   if ($settings['components']['progress_bar']) {
     $page['page_bottom']['supersized']['progress_bar'] = array(
@@ -316,7 +316,7 @@ function supersized_run_supersized($node, &$page) {
       '#markup' => theme('supersized_progress_bar'),
     );
   }
-  
+
   // Add thumb nav.
   if ($settings['components']['thumbnail_navigation']) {
     $page['page_bottom']['supersized']['thumbnail_navigation'] = array(
@@ -326,7 +326,7 @@ function supersized_run_supersized($node, &$page) {
   }
 
   // Add thumb links.
-  if ($settings['components']['thumb_links']) {    
+  if ($settings['components']['thumb_links']) {
     $page['page_bottom']['supersized']['thumb_tray'] = array(
       '#type' => 'markup',
       '#markup' => theme('supersized_thumb_links'),
@@ -334,7 +334,7 @@ function supersized_run_supersized($node, &$page) {
   }
 
   // Control bar
-  if ($settings['components']['control_bar']) {    
+  if ($settings['components']['control_bar']) {
     $page['page_bottom']['supersized']['control_bar'] = array(
       '#type' => 'markup',
       '#markup' => theme('supersized_control_bar'),
@@ -363,7 +363,7 @@ function supersized_get_supersized_field($node) {
 /**
  * Implements hook_permission().
  */
-function supersized_permission() {  
+function supersized_permission() {
   return array(
     'administer node supersized settings' => array(
       'title' => t('Administer node supersized settings'),
@@ -378,15 +378,15 @@ function supersized_permission() {
 function supersized_menu() {
   $items = array();
   $items['node/%node/supersized'] = array(
-    'title' => 'Supersized settings', 
-    'page callback' => 'drupal_get_form', 
-    'page arguments' => array('supersized_node_settings_form', 1), 
+    'title' => 'Supersized settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('supersized_node_settings_form', 1),
     'access callback' => 'supersized_node_settings_access',
-    'access arguments' => array(1), 
-    'weight' => 1, 
-    'type' => MENU_LOCAL_TASK, 
+    'access arguments' => array(1),
+    'weight' => 1,
+    'type' => MENU_LOCAL_TASK,
     'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
-  );  
+  );
   return $items;
 }
 
@@ -410,7 +410,7 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     $field = supersized_get_supersized_field($node);
     $settings = $field['instance']['settings'];
   }
-  
+
   $form = array();
   $form['nid'] = array(
     '#type' => 'hidden',
@@ -456,7 +456,7 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     '#description' => t('Time between slide changes in milliseconds.'),
     '#default_value' => isset($settings['functionalities']['slide_interval']) ? $settings['functionalities']['slide_interval'] : supersized_default_settings('slide_interval'),
     '#size' => 6,
-    '#maxlength' => 6, 
+    '#maxlength' => 6,
     '#required' => TRUE,
   );
   $form['functionalities']['transition'] = array(
@@ -482,8 +482,8 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     '#description' => t('Speed of transitions in milliseconds.'),
     '#default_value' => isset($settings['functionalities']['transition_speed']) ? $settings['functionalities']['transition_speed'] : supersized_default_settings('transition_speed'),
     '#size' => 6,
-    '#maxlength' => 6, 
-    '#required' => TRUE,    
+    '#maxlength' => 6,
+    '#required' => TRUE,
   );
   $form['functionalities']['new_window'] = array(
     '#type' => 'radios',
@@ -491,7 +491,7 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     '#description' => t('Slide links open in a new window.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['functionalities']['new_window']) ? $settings['functionalities']['new_window'] : supersized_default_settings('new_window'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['functionalities']['pause_hover'] = array(
     '#type' => 'radios',
@@ -515,7 +515,7 @@ function supersized_node_settings_form($form, &$form_state, $node) {
   );
   $form['functionalities']['on_new_slide'] = array(
     '#type' => 'hidden',
-    '#value' => 'on_new_slide_callback',    
+    '#value' => 'on_new_slide_callback',
   );
   $form['dimension'] = array(
     '#type' => 'fieldset',
@@ -526,20 +526,20 @@ function supersized_node_settings_form($form, &$form_state, $node) {
   $form['dimension']['min_width'] = array(
     '#type' => 'textfield',
     '#title' => t('Minimum width'),
-    '#description' => t('Minimum width the image is allowed to be. If it is met, the image won\'t size down any further.'),
+    '#description' => t("Minimum width the image is allowed to be. If it is met, the image won't size down any further."),
     '#default_value' => isset($settings['dimension']['min_width']) ? $settings['dimension']['min_width'] : supersized_default_settings('min_width'),
     '#size' => 6,
-    '#maxlength' => 6, 
-    '#required' => TRUE,    
+    '#maxlength' => 6,
+    '#required' => TRUE,
   );
   $form['dimension']['min_height'] = array(
     '#type' => 'textfield',
     '#title' => t('Minimum height'),
-    '#description' => t('Minimum height the image is allowed to be. If it is met, the image won\'t size down any further.'),
+    '#description' => t("Minimum height the image is allowed to be. If it is met, the image won't size down any further."),
     '#default_value' => isset($settings['dimension']['min_height']) ? $settings['dimension']['min_height'] : supersized_default_settings('min_height'),
     '#size' => 6,
-    '#maxlength' => 6, 
-    '#required' => TRUE,    
+    '#maxlength' => 6,
+    '#required' => TRUE,
   );
   $form['dimension']['vertical_center'] = array(
     '#type' => 'hidden',
@@ -547,7 +547,7 @@ function supersized_node_settings_form($form, &$form_state, $node) {
   );
   $form['dimension']['horizontal_center'] = array(
     '#type' => 'hidden',
-    '#value' => 1,    
+    '#value' => 1,
   );
   $form['dimension']['fit_always'] = array(
     '#type' => 'radios',
@@ -563,7 +563,7 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     '#description' => t('Prevents the image from being cropped by locking it at 100% height.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['dimension']['fit_portrait']) ? $settings['dimension']['fit_portrait'] : supersized_default_settings('fit_portrait'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['dimension']['fit_landscape'] = array(
     '#type' => 'radios',
@@ -571,7 +571,7 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     '#description' => t('Prevents the image from being cropped by locking it at 100% width.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['dimension']['fit_landscape']) ? $settings['dimension']['fit_landscape'] : supersized_default_settings('fit_landscape'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components'] = array(
     '#type' => 'fieldset',
@@ -585,7 +585,7 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     '#description' => t('Provide arrows for left and right navigation.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['components']['arrow_nav']) ? $settings['components']['arrow_nav'] : supersized_default_settings('arrow_nav'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components']['slide_links'] = array(
     '#type' => 'select',
@@ -598,7 +598,7 @@ function supersized_node_settings_form($form, &$form_state, $node) {
       'blank' => t('Links are empty. Allows for background sprites.'),
     ),
     '#default_value' => isset($settings['components']['slide_links']) ? $settings['components']['slide_links'] : supersized_default_settings('slide_links'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components']['thumb_links'] = array(
     '#type' => 'radios',
@@ -606,15 +606,15 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     '#description' => t('Individual thumb links for each slide.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['components']['thumb_links']) ? $settings['components']['thumb_links'] : supersized_default_settings('thumb_links'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components']['thumbnail_navigation'] = array(
     '#type' => 'radios',
     '#title' => t('Thumbnail navigation'),
-    '#description' => t('Toggles forward/backward thumbnail navigation. When on, thumbnails from the next/previous posts are generated and can be clicked to navigate. If the \'thumb\' field for the slide is empty, it will simply scale down the full size image.'),
+    '#description' => t("Toggles forward/backward thumbnail navigation. When on, thumbnails from the next/previous posts are generated and can be clicked to navigate. If the 'thumb' field for the slide is empty, it will simply scale down the full size image."),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['components']['thumbnail_navigation']) ? $settings['components']['thumbnail_navigation'] : supersized_default_settings('thumbnail_navigation'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components']['progress_bar'] = array(
     '#type' => 'radios',
@@ -622,7 +622,7 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     '#description' => t('Progress bar that runs based on the the slide interval.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['components']['progress_bar']) ? $settings['components']['progress_bar'] : supersized_default_settings('progress_bar'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components']['control_bar'] = array(
     '#type' => 'radios',
@@ -630,19 +630,22 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     '#description' => t('Control bar that the slides.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['components']['control_bar']) ? $settings['components']['control_bar'] : supersized_default_settings('control_bar'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components']['mouse_scrub'] = array(
     '#type' => 'hidden',
     '#value' => 0,
   );
   $form['submit'] = array(
-    '#type' => 'submit', 
-    '#value' => t('Submit')
+    '#type' => 'submit',
+    '#value' => t('Submit'),
   );
   return $form;
 }
 
+/**
+ * Submit handler for node supersized settings form.
+ */
 function supersized_node_settings_form_submit($form, &$form_state) {
   $values = $form_state['values'];
   $settings['functionalities']['autoplay'] = $values['autoplay'];
@@ -672,7 +675,7 @@ function supersized_node_settings_form_submit($form, &$form_state) {
   $settings['components']['progress_bar'] = $values['progress_bar'];
   $settings['components']['control_bar'] = $values['control_bar'];
   $settings['components']['mouse_scrub'] = $values['mouse_scrub'];
-  
+
   $record = array(
     'nid' => $values['nid'],
     'settings' => serialize($settings),

@@ -66,7 +66,7 @@ function supersized_context_menu() {
     'title' => 'Autocomplete',
     'page callback' => 'supersized_autocomplete',
     'access arguments' => array('administer site configuration'),
-    'type' => MENU_CALLBACK
+    'type' => MENU_CALLBACK,
   );
   return $items;
 }
@@ -81,6 +81,9 @@ function supersized_context_autocomplete() {
   drupal_json_output(drupal_map_assoc($matches));
 }
 
+/**
+ * A helper function for autocomplete.
+ */
 function _supersized_context_autocomplete($string) {
   $output = array();
   if (!$string) {
@@ -118,7 +121,8 @@ function supersized_context_autocomplete_nodes($string) {
   }
 
   if ($match) {
-    // If it found a nid via specification, reduce our resultset to just that nid.
+    // If it found a nid via specification, reduce our resultset to just that
+    // nid.
     $query->condition('n.nid', $preg_matches[1]);
   }
   else {

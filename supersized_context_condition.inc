@@ -8,15 +8,24 @@
  */
 
 class supersized_context_condition extends context_condition {
+  /**
+   * Override condition_values().
+   */
   function condition_values() {
     return array(1 => t('Active if no supersized assigned either in the node or by context.'));
   }
+  /**
+   * Override editor_form().
+   */
   function editor_form($context = NULL) {
     $form = parent::editor_form($context);
     $form[1]['#title'] = t('Active if no supersized assigned either in the node or by context.');
     $form['#weight'] = -10;
     return $form;
   }
+  /**
+   * Override execute().
+   */
   function execute() {
     foreach ($this->get_contexts() as $context) {
       $node = NULL;
@@ -42,4 +51,3 @@ class supersized_context_condition extends context_condition {
     }
   }
 }
-

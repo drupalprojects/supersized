@@ -178,7 +178,7 @@ function supersized_field_instance_settings_form($field, $instance) {
     '#description' => t('Time between slide changes in milliseconds.'),
     '#default_value' => isset($settings['functionalities']['slide_interval']) ? $settings['functionalities']['slide_interval'] : supersized_default_settings('slide_interval'),
     '#size' => 6,
-    '#maxlength' => 6, 
+    '#maxlength' => 6,
     '#required' => TRUE,
   );
   $form['functionalities']['transition'] = array(
@@ -204,8 +204,8 @@ function supersized_field_instance_settings_form($field, $instance) {
     '#description' => t('Speed of transitions in milliseconds.'),
     '#default_value' => isset($settings['functionalities']['transition_speed']) ? $settings['functionalities']['transition_speed'] : supersized_default_settings('transition_speed'),
     '#size' => 6,
-    '#maxlength' => 6, 
-    '#required' => TRUE,    
+    '#maxlength' => 6,
+    '#required' => TRUE,
   );
   $form['functionalities']['new_window'] = array(
     '#type' => 'radios',
@@ -213,7 +213,7 @@ function supersized_field_instance_settings_form($field, $instance) {
     '#description' => t('Slide links open in a new window.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['functionalities']['new_window']) ? $settings['functionalities']['new_window'] : supersized_default_settings('new_window'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['functionalities']['pause_hover'] = array(
     '#type' => 'radios',
@@ -237,7 +237,7 @@ function supersized_field_instance_settings_form($field, $instance) {
   );
   $form['functionalities']['on_new_slide'] = array(
     '#type' => 'hidden',
-    '#value' => 'on_new_slide_callback',    
+    '#value' => 'on_new_slide_callback',
   );
   $form['dimension'] = array(
     '#type' => 'fieldset',
@@ -248,20 +248,20 @@ function supersized_field_instance_settings_form($field, $instance) {
   $form['dimension']['min_width'] = array(
     '#type' => 'textfield',
     '#title' => t('Minimum width'),
-    '#description' => t('Minimum width the image is allowed to be. If it is met, the image won\'t size down any further.'),
+    '#description' => t("Minimum width the image is allowed to be. If it is met, the image won't size down any further."),
     '#default_value' => isset($settings['dimension']['min_width']) ? $settings['dimension']['min_width'] : supersized_default_settings('min_width'),
     '#size' => 6,
-    '#maxlength' => 6, 
-    '#required' => TRUE,    
+    '#maxlength' => 6,
+    '#required' => TRUE,
   );
   $form['dimension']['min_height'] = array(
     '#type' => 'textfield',
     '#title' => t('Minimum height'),
-    '#description' => t('Minimum height the image is allowed to be. If it is met, the image won\'t size down any further.'),
+    '#description' => t("Minimum height the image is allowed to be. If it is met, the image won't size down any further."),
     '#default_value' => isset($settings['dimension']['min_height']) ? $settings['dimension']['min_height'] : supersized_default_settings('min_height'),
     '#size' => 6,
-    '#maxlength' => 6, 
-    '#required' => TRUE,    
+    '#maxlength' => 6,
+    '#required' => TRUE,
   );
   $form['dimension']['vertical_center'] = array(
     '#type' => 'hidden',
@@ -269,7 +269,7 @@ function supersized_field_instance_settings_form($field, $instance) {
   );
   $form['dimension']['horizontal_center'] = array(
     '#type' => 'hidden',
-    '#value' => 1,    
+    '#value' => 1,
   );
   $form['dimension']['fit_always'] = array(
     '#type' => 'radios',
@@ -285,7 +285,7 @@ function supersized_field_instance_settings_form($field, $instance) {
     '#description' => t('Prevents the image from being cropped by locking it at 100% height.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['dimension']['fit_portrait']) ? $settings['dimension']['fit_portrait'] : supersized_default_settings('fit_portrait'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['dimension']['fit_landscape'] = array(
     '#type' => 'radios',
@@ -293,7 +293,7 @@ function supersized_field_instance_settings_form($field, $instance) {
     '#description' => t('Prevents the image from being cropped by locking it at 100% width.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['dimension']['fit_landscape']) ? $settings['dimension']['fit_landscape'] : supersized_default_settings('fit_landscape'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components'] = array(
     '#type' => 'fieldset',
@@ -307,7 +307,7 @@ function supersized_field_instance_settings_form($field, $instance) {
     '#description' => t('Provide arrows for left and right navigation.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['components']['arrow_nav']) ? $settings['components']['arrow_nav'] : supersized_default_settings('arrow_nav'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components']['slide_links'] = array(
     '#type' => 'select',
@@ -320,7 +320,7 @@ function supersized_field_instance_settings_form($field, $instance) {
       'blank' => t('Links are empty. Allows for background sprites.'),
     ),
     '#default_value' => isset($settings['components']['slide_links']) ? $settings['components']['slide_links'] : supersized_default_settings('slide_links'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components']['thumb_links'] = array(
     '#type' => 'radios',
@@ -328,15 +328,15 @@ function supersized_field_instance_settings_form($field, $instance) {
     '#description' => t('Individual thumb links for each slide.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['components']['thumb_links']) ? $settings['components']['thumb_links'] : supersized_default_settings('thumb_links'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components']['thumbnail_navigation'] = array(
     '#type' => 'radios',
     '#title' => t('Thumbnail navigation'),
-    '#description' => t('Toggles forward/backward thumbnail navigation. When on, thumbnails from the next/previous posts are generated and can be clicked to navigate. If the \'thumb\' field for the slide is empty, it will simply scale down the full size image.'),
+    '#description' => t("Toggles forward/backward thumbnail navigation. When on, thumbnails from the next/previous posts are generated and can be clicked to navigate. If the 'thumb' field for the slide is empty, it will simply scale down the full size image."),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['components']['thumbnail_navigation']) ? $settings['components']['thumbnail_navigation'] : supersized_default_settings('thumbnail_navigation'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components']['progress_bar'] = array(
     '#type' => 'radios',
@@ -344,7 +344,7 @@ function supersized_field_instance_settings_form($field, $instance) {
     '#description' => t('Progress bar that runs based on the the slide interval.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['components']['progress_bar']) ? $settings['components']['progress_bar'] : supersized_default_settings('progress_bar'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components']['control_bar'] = array(
     '#type' => 'radios',
@@ -352,7 +352,7 @@ function supersized_field_instance_settings_form($field, $instance) {
     '#description' => t('Control bar that the slides.'),
     '#options' => array(1 => t('Yes'), 0 => 'No'),
     '#default_value' => isset($settings['components']['control_bar']) ? $settings['components']['control_bar'] : supersized_default_settings('control_bar'),
-    '#required' => TRUE,    
+    '#required' => TRUE,
   );
   $form['components']['mouse_scrub'] = array(
     '#type' => 'hidden',
@@ -446,7 +446,7 @@ function supersized_field_widget_form(&$form, &$form_state, $field, $instance, $
   foreach (element_children($elements) as $delta) {
     $elements[$delta]['#process'][] = 'supersized_field_widget_process';
   }
-  
+
   return $elements;
 }
 
@@ -550,6 +550,9 @@ function supersized_field_formatter_view($entity_type, $entity, $field, $instanc
   return $element;
 }
 
+/**
+ * Implements hook_filefield_sources_widgets().
+ */
 function supersized_filefield_sources_widgets() {
   // Add any widgets that your module supports here.
   return array('supersized_slide');

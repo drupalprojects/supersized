@@ -1,7 +1,6 @@
 name = Supersized
 description = To enabled Supersized JQuery plugin provided by a new field type.
 package = Other
-version = 7.x-1.0
 core = 7.x
 dependencies[] = file
 dependencies[] = image
