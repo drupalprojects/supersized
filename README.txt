@@ -16,10 +16,10 @@ Aaron Fan (http://drupal.org/user/576672)
 
 DESCRIPTION
 -----------
-This module make it easy to implement Supersized JQuery plugin into Druapl 
+This module make it easy to implement Supersized JQuery plugin into Druapl
 system. All available Supersized JQuery settings are configurable by UI.
 
-A field type "Supersized Slide" comes with this module, and obviously, 
+A field type "Supersized Slide" comes with this module, and obviously,
 Supersized background slides are managed by fields of node.
 
 DEPENDENCIES
@@ -30,8 +30,8 @@ image
 imagecache_actions
 libraries (>=2)
 
-We are trying to minimize the dependencies as much as possible. However, the 
-file size of background images can be very huge. So we decided to predefine an 
+We are trying to minimize the dependencies as much as possible. However, the
+file size of background images can be very huge. So we decided to predefine an
 image style which is going to scale down the dimension and well as changing the
 file format into jpeg which helps a lot to reduce the file size.
 
@@ -52,7 +52,7 @@ sites/all/libraries.
 
 USAGE
 -----
-1. Add a "Supersized Slide" field to any content type, in most of the cases, 
+1. Add a "Supersized Slide" field to any content type, in most of the cases,
 this would be a multiple value field.
 2. Configure the Supersized options such as transition, interval, etc...
 3. Create a new content and upload beautiful images using the Supersized field.
@@ -64,9 +64,9 @@ Enabled Supersized Context, you will find a new condition and a reaction.  Use
 this new condition to determine weather a page has Supersized, and use this new
 reaction to assign node with Supersized.
 
-For example, you may want to have Supersized on a page which is created by 
-Views, and the path is `/latest-blog`.  You should create a node that has 
-Supersized field, upload your beautiful pictures and save it.  You will then 
+For example, you may want to have Supersized on a page which is created by
+Views, and the path is `/latest-blog`.  You should create a node that has
+Supersized field, upload your beautiful pictures and save it.  You will then
 create a new context, condition with be path: /latest-blog, and your reaction
 would be Supersized: a chosen node.
 
@@ -78,10 +78,10 @@ theme_supersized_progress_bar()
 theme_supersized_thumbnail_navigation()
 theme_supersized_thumb_links()
 theme_supersized_slide_links()
-theme_supersized_control_bar()
+template_preprocess_supersized_control_bar()
 
 The default them comes with Supersized JQuery plugin supports 'image_path'. The
-default path would be /js/supersized/slideshow/img, however, if your theme has 
+default path would be /js/supersized/slideshow/img, however, if your theme has
 /images/supersized/ this folder, images will be crab from this folder instead.
 
 AFTER SLIDE CALLBACK
