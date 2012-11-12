@@ -58,6 +58,9 @@ this would be a multiple value field.
 3. Create a new content and upload beautiful images using the Supersized field.
 Yes, there you go! Supersized is just that easy to setup.
 
+Important, if the background of your theme is not transparent, you will not be
+able to see the background.  You may need to make changes to your theme CSS.
+
 CONTEXT
 ---------
 Enabled Supersized Context, you will find a new condition and a reaction.  Use
