@@ -10,17 +10,17 @@
  */
 function supersized_context_context_plugins() {
   $plugins = array();
-  $plugins['supersized_condition'] = array(
+  $plugins['supersized_context_condition'] = array(
     'handler' => array(
-      'path' => drupal_get_path('module', 'supersized'),
+      'path' => drupal_get_path('module', 'supersized_context'),
       'file' => 'supersized_context_condition.inc',
       'class' => 'supersized_context_condition',
       'parent' => 'context_condition',
     ),
   );
-  $plugins['supersized_reaction'] = array(
+  $plugins['supersized_context_reaction'] = array(
     'handler' => array(
-      'path' => drupal_get_path('module', 'supersized'),
+      'path' => drupal_get_path('module', 'supersized_context'),
       'file' => 'supersized_context_reaction.inc',
       'class' => 'supersized_context_reaction',
       'parent' => 'context_reaction',
@@ -64,7 +64,7 @@ function supersized_context_menu() {
   $items = array();
   $items['supersized/autocomplete'] = array(
     'title' => 'Autocomplete',
-    'page callback' => 'supersized_autocomplete',
+    'page callback' => 'supersized_context_autocomplete',
     'access arguments' => array('administer site configuration'),
     'type' => MENU_CALLBACK,
   );
@@ -77,7 +77,7 @@ function supersized_context_menu() {
 function supersized_context_autocomplete() {
   $args = func_get_args();
   $string = implode('/', $args);
-  $matches = _supersized_autocomplete($string);
+  $matches = _supersized_context_autocomplete($string);
   drupal_json_output(drupal_map_assoc($matches));
 }
 
@@ -89,7 +89,7 @@ function _supersized_context_autocomplete($string) {
   if (!$string) {
     return $output;
   }
-  $nodes = supersized_autocomplete_nodes($string);
+  $nodes = supersized_context_autocomplete_nodes($string);
   return $nodes;
 }
 

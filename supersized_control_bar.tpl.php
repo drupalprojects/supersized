@@ -1,3 +1,12 @@
+<?php
+/**
+ * @file
+ * Template file for control bar.
+ *
+ * Also see template_preprocess_supersized_control_bar().
+ */
+?>
+
 <div id="controls-wrapper" class="load-item">
   <div id="controls">
 
