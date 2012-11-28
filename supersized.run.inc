@@ -18,7 +18,7 @@ function supersized_run($node, &$page) {
     $info = supersized_libraries_info();
     $info = $info['supersized'];
     $url = l(t('here'), $info['download url']);
-    $message = t('Install version 3.2.8 of the Supersized (from !url) in a libraries directory such as "sites/all/libraries."', array('!url' => $url));
+    $message = t('Install version 3.2.8 of the Supersized (from @url) in a libraries directory such as "sites/all/libraries."', array('@url' => $url));
     drupal_set_message($message, 'error');
     return FALSE;
   }
