@@ -84,8 +84,9 @@ theme_supersized_slide_links()
 template_preprocess_supersized_control_bar()
 
 The default them comes with Supersized JQuery plugin supports 'image_path'. The
-default path would be /js/supersized/slideshow/img, however, if your theme has
-/images/supersized/ this folder, images will be crab from this folder instead.
+default path would be {LIBRARY PATH}/supersized/slideshow/img, however, if your
+theme contains /images/supersized/ this folder, images will be crab from this
+folder instead.
 
 AFTER SLIDE CALLBACK
 --------------------
