@@ -5,8 +5,8 @@ CONTENTS OF THIS FILE
  * Author
  * Description
  * Dependencies
- * Installation
  * Usage
+ * Installation
  * Context
  * Themes
 
@@ -35,21 +35,6 @@ file size of background images can be very huge. So we decided to predefine an
 image style which is going to scale down the dimension and well as changing the
 file format into jpeg which helps a lot to reduce the file size.
 
-
-INSTALLATION
-------------
-Install this module as usual.  Without jquery callback, creatives are limited.
-Until now, the latest released version does not comes with the slide query.
-You should download the version comes with "after slide" callback option from
-https://github.com/f3ndot/supersized/tree/3718ae83f0945e327cc09530b959c5a8b049871f
-decompress the downloaded file and place it in the the libraries folder such us
-sites/all/libraries.
-
-* Important, we will be using the js and css files from supersized/slideshow.
-
-
-
-
 USAGE
 -----
 1. Add a "Supersized Slide" field to any content type, in most of the cases,
@@ -58,8 +43,23 @@ this would be a multiple value field.
 3. Create a new content and upload beautiful images using the Supersized field.
 Yes, there you go! Supersized is just that easy to setup.
 
-Important, if the background of your theme is not transparent, you will not be
-able to see the background.  You may need to make changes to your theme CSS.
+* Important, if the background of your theme is not transparent, you will not
+be able to see the background.  You may need to make changes to your theme CSS.
+
+INSTALLATION
+------------
+Download Supersized from:
+https://github.com/f3ndot/supersized/tree/3718ae83f0945e327cc09530b959c5a8b049871f
+This is not the official release, however, this branch provide an "after slide"
+JS callback which dramatically increases the ability to create awesome effects.
+
+1. Decompress the downloaded file and place it in the the libraries folder such
+   as sites/all/libraries.
+2. Install this module as usual, and enabled Supersized.
+3. (Optional) Enable Supersized context, which allow you to assign content with
+   Supersized under any context condition.
+
+* Important, we will be using the js and css files from supersized/slideshow.
 
 CONTEXT
 ---------
