@@ -49,7 +49,7 @@ be able to see the background.  You may need to make changes to your theme CSS.
 INSTALLATION
 ------------
 Download Supersized from:
-https://github.com/f3ndot/supersized/tree/3718ae83f0945e327cc09530b959c5a8b049871f
+http://bit.ly/YCHcYs
 This is not the official release, however, this branch provide an "after slide"
 JS callback which dramatically increases the ability to create awesome effects.
 
