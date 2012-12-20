@@ -213,11 +213,13 @@ function supersized_page_alter(&$page) {
   $node = NULL;
 
   // Try to see if there's any supersized set by context.
-  if ($plugin = context_get_plugin('reaction', 'supersized_context')) {
+  $plugin = context_get_plugin('reaction', 'supersized_context');
+  if (is_object($plugin)) {
     $node = node_load($plugin->execute());
   }
-  else {
-    // If there's a node defined, try to run supersized.
+
+  // If there's a node defined, try to run supersized.
+  if (empty($node)) {
     $node = menu_get_object();
   }
 
