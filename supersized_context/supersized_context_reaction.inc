@@ -3,7 +3,7 @@
  * @file
  * Reaction class of supersized.
  *
- * To apply Suersized.
+ * To apply Supersized.
  */
 
 class supersized_context_reaction extends context_reaction {
