@@ -22,6 +22,9 @@ system. All available Supersized JQuery settings are configurable by UI.
 A field type "Supersized Slide" comes with this module, and obviously,
 Supersized background slides are managed by fields of node.
 
+We have also provided a Context reaction, so you could assign node with
+Supersized field by any Context condition!
+
 DEPENDENCIES
 ------------
 context

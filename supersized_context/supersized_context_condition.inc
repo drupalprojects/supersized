@@ -29,10 +29,6 @@ class supersized_context_condition extends context_condition {
   function execute() {
     foreach ($this->get_contexts() as $context) {
       $node = NULL;
-      // Try to see if there's any supersized set by context.
-      if ($plugin = context_get_plugin('reaction', 'am_billboard')) {
-        $node = node_load($plugin->execute());
-      }
       // Get node by page.
       if (empty($node)) {
         if (arg(2) !== 'edit') {

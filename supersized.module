@@ -6,7 +6,7 @@
  */
 
 // Load all Field module hooks for Supersized.
-require_once drupal_get_path('module', 'supersized') . '/supersized.field.inc';
+require_once 'supersized.field.inc';
 
 /**
  * Implements hook_library_info().
@@ -126,8 +126,8 @@ function supersized_image_default_styles() {
         'weight' => 0,
       ),
       array(
-        'label' => 'Change file format',
-        'help' => 'Choose to save the image as a different filetype.',
+        'label' => t('Change file format'),
+        'help' => t('Choose to save the image as a different filetype.'),
         'effect callback' => 'coloractions_convert_image',
         'dimensions passthrough' => TRUE,
         'form callback' => 'coloractions_convert_form',
@@ -147,8 +147,8 @@ function supersized_image_default_styles() {
     'name' => 'supersized-thumbnail',
     'effects' => array(
       1 => array(
-        'label' => 'Scale and crop',
-        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
+        'label' => t('Scale and crop'),
+        'help' => t('Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.'),
         'effect callback' => 'image_scale_and_crop_effect',
         'dimensions callback' => 'image_resize_dimensions',
         'form callback' => 'image_resize_form',
@@ -162,8 +162,8 @@ function supersized_image_default_styles() {
         'weight' => '-10',
       ),
       3 => array(
-        'label' => 'Change file format',
-        'help' => 'Choose to save the image as a different filetype.',
+        'label' => t('Change file format'),
+        'help' => t('Choose to save the image as a different filetype.'),
         'effect callback' => 'coloractions_convert_image',
         'dimensions passthrough' => TRUE,
         'form callback' => 'coloractions_convert_form',
@@ -177,8 +177,8 @@ function supersized_image_default_styles() {
         'weight' => '-9',
       ),
       2 => array(
-        'label' => 'Rounded Corners',
-        'help' => 'This is true cropping, not overlays, so the result <em>can</em> be transparent.',
+        'label' => t('Rounded Corners'),
+        'help' => t('This is true cropping, not overlays, so the result <em>can</em> be transparent.'),
         'effect callback' => 'canvasactions_roundedcorners_image',
         'dimensions passthrough' => TRUE,
         'form callback' => 'canvasactions_roundedcorners_form',
@@ -360,14 +360,14 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     '#title' => t('Transition'),
     '#descipion' => t('Controls which effect is used to transition between slides.'),
     '#options' => array(
-      0 => 'None',
-      1 => 'Fade',
-      2 => 'Slide Top',
-      3 => 'Slide Right',
-      4 => 'Slide Bottom',
-      5 => 'Slide Left',
-      6 => 'Carousel Right',
-      7 => 'Carousel Left',
+      0 => t('None'),
+      1 => t('Fade'),
+      2 => t('Slide Top'),
+      3 => t('Slide Right'),
+      4 => t('Slide Bottom'),
+      5 => t('Slide Left'),
+      6 => t('Carousel Right'),
+      7 => t('Carousel Left'),
     ),
     '#default_value' => isset($settings['functionalities']['transition']) ? $settings['functionalities']['transition'] : supersized_default_settings('transition'),
     '#required' => TRUE,
