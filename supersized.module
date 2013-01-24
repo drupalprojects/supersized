@@ -211,11 +211,14 @@ function supersized_image_default_styles() {
 function supersized_page_alter(&$page) {
 
   $node = NULL;
+  $plugin = NULL;
 
   // Try to see if there's any supersized set by context.
-  $plugin = context_get_plugin('reaction', 'supersized_context');
-  if (is_object($plugin)) {
-    $node = node_load($plugin->execute());
+  if (module_exists('context')) {
+    $plugin = context_get_plugin('reaction', 'supersized_context');
+    if (is_object($plugin)) {
+      $node = node_load($plugin->execute());
+    }
   }
 
   // If there's a node defined, try to run supersized.

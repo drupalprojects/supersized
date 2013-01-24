@@ -12,6 +12,12 @@
  */
 function supersized_run($node, &$page) {
 
+  // Check if supersized field exists.
+  $field = supersized_get_supersized_field($node);
+  if (empty($field)) {
+    return;
+  }
+
   // Detect library.
   $library = libraries_load('supersized');
   if (empty($library['loaded'])) {
@@ -23,7 +29,6 @@ function supersized_run($node, &$page) {
     return FALSE;
   }
 
-  $field = supersized_get_supersized_field($node);
   $items = $field['items'];
   $instance = $field['instance'];
 
