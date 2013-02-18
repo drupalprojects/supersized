@@ -18,6 +18,14 @@ function supersized_run($node, &$page) {
     return;
   }
 
+  $items = $field['items'];
+  $instance = $field['instance'];
+
+  // Exit if no items found.
+  if (empty($items)) {
+    return;
+  }
+
   // Detect library.
   $library = libraries_load('supersized');
   if (empty($library['loaded'])) {
@@ -29,18 +37,10 @@ function supersized_run($node, &$page) {
     return FALSE;
   }
 
-  $items = $field['items'];
-  $instance = $field['instance'];
-
   // Try to find if there's a specific settings for this particular node.
   $settings = supersized_get_node_settings($node);
   if (empty($settings)) {
     $settings = $field['instance']['settings'];
-  }
-
-  // Exit if no items found.
-  if (empty($items)) {
-    return;
   }
 
   // Construct image objects.
