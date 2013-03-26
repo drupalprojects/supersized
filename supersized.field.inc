@@ -28,6 +28,7 @@ function supersized_field_info() {
         'max_resolution' => '',
         'min_resolution' => '',
         'default_image' => 0,
+        'mobile_disabled' => 1,
         'functionalities' => array(
           'autoplay' => supersized_default_settings('autoplay'),
           'start_slide' => supersized_default_settings('start_slide'),
@@ -100,6 +101,7 @@ function supersized_default_settings($setting) {
     'progress_bar' => 1,
     'mouse_scrub' => 0,
     'control_bar' => 1,
+    'mobile_disabled' => 1,
   );
   return (isset($settings[$setting])) ? $settings[$setting] : NULL;
 }
@@ -124,6 +126,14 @@ function supersized_field_instance_settings_form($field, $instance) {
   $settings = $instance['settings'];
 
   // Add other configuration options.
+  $url = l(t('Browscap'), 'http://drupal.org/project/browscap');
+  $description = t('!url is required for this function to work properly.', array('!url' => $url));
+  $form['mobile_disabled'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Disabled Supersized on mobile devices'),
+    '#default_value' => isset($settings['mobile_disabled']) ? $settings['mobile_disabled'] : supersized_default_settings('mobile_disabled'),
+    '#description' => $description,
+  );
   $form['description_field'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable <em>Description</em> field'),

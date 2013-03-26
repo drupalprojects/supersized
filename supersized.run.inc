@@ -18,12 +18,27 @@ function supersized_run($node, &$page) {
     return;
   }
 
+  // Get Supersized info.
   $items = $field['items'];
   $instance = $field['instance'];
 
   // Exit if no items found.
   if (empty($items)) {
     return;
+  }
+
+  // Try to find if there's a specific settings for this particular node.
+  $settings = supersized_get_node_settings($node);
+  if (empty($settings)) {
+    $settings = $field['instance']['settings'];
+  }
+
+  // Check mobile device.
+  if ($settings['mobile_disabled'] === 1 && module_exists('browscap')) {
+    $browser = browscap_get_browser();
+    if ($browser['ismobiledevice'] === TRUE) {
+      return;
+    }
   }
 
   // Detect library.
@@ -35,12 +50,6 @@ function supersized_run($node, &$page) {
     $message = t('Install version 3.2.8 of the Supersized (from @url) in a libraries directory such as "sites/all/libraries."', array('@url' => $url));
     drupal_set_message($message, 'error');
     return FALSE;
-  }
-
-  // Try to find if there's a specific settings for this particular node.
-  $settings = supersized_get_node_settings($node);
-  if (empty($settings)) {
-    $settings = $field['instance']['settings'];
   }
 
   // Construct image objects.
