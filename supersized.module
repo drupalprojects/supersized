@@ -316,13 +316,19 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     '#value' => $node->nid,
   );
   $url = l(t('Browscap'), 'http://drupal.org/project/browscap');
-  $description = t('!url is required for this function to work properly.', array('!url' => $url));
-  $form['mobile_disabled'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Disabled Supersized on mobile devices'),
-    '#default_value' => isset($settings['mobile_disabled']) ? $settings['mobile_disabled'] : supersized_default_settings('mobile_disabled'),
-    '#description' => $description,
-  );
+  $description = t('You may disable Supersized! if !url installed.', array('!url' => $url));
+  if (module_exists('browscap')) {
+    $form['mobile_disabled'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Disabled Supersized on mobile devices'),
+      '#default_value' => isset($settings['mobile_disabled']) ? $settings['mobile_disabled'] : supersized_default_settings('mobile_disabled'),
+    );
+  }
+  else {
+    $form['mobile_disabled_tips'] = array(
+      '#markup' => $description,
+    );
+  }
   $form['functionalities'] = array(
     '#type' => 'fieldset',
     '#title' => t("Supersized functionality settings"),

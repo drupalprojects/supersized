@@ -127,13 +127,20 @@ function supersized_field_instance_settings_form($field, $instance) {
 
   // Add other configuration options.
   $url = l(t('Browscap'), 'http://drupal.org/project/browscap');
-  $description = t('!url is required for this function to work properly.', array('!url' => $url));
-  $form['mobile_disabled'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Disabled Supersized on mobile devices'),
-    '#default_value' => isset($settings['mobile_disabled']) ? $settings['mobile_disabled'] : supersized_default_settings('mobile_disabled'),
-    '#description' => $description,
-  );
+  $description = t('You may disable Supersized! if !url installed.', array('!url' => $url));
+  if (module_exists('browscap')) {
+    $form['mobile_disabled'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Disabled Supersized on mobile devices'),
+      '#default_value' => isset($settings['mobile_disabled']) ? $settings['mobile_disabled'] : supersized_default_settings('mobile_disabled'),
+    );
+  }
+  else {
+    $form['mobile_disabled_tips'] = array(
+      '#markup' => $description,
+    );
+  }
+
   $form['description_field'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable <em>Description</em> field'),
