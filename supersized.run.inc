@@ -36,7 +36,7 @@ function supersized_run($node, &$page) {
   // Check mobile device.
   if (isset($settings['mobile_disabled']) && $settings['mobile_disabled'] === 1 && module_exists('browscap')) {
     $browser = browscap_get_browser();
-    if ($browser['ismobiledevice'] === TRUE) {
+    if ($browser['ismobiledevice'] == 'true') {
       return;
     }
   }
