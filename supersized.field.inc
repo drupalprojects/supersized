@@ -102,6 +102,7 @@ function supersized_default_settings($setting) {
     'mouse_scrub' => 0,
     'control_bar' => 1,
     'mobile_disabled' => 1,
+    'overlay' => NULL,
   );
   return (isset($settings[$setting])) ? $settings[$setting] : NULL;
 }
@@ -119,6 +120,8 @@ function supersized_field_settings_form($field, $instance) {
  * Implements hook_field_instance_settings_form().
  */
 function supersized_field_instance_settings_form($field, $instance) {
+
+  drupal_add_css(drupal_get_path('module', 'supersized') . '/css/supersized-default.css');
 
   // Take image form as basic.
   $form = image_field_instance_settings_form($field, $instance);
@@ -140,6 +143,24 @@ function supersized_field_instance_settings_form($field, $instance) {
       '#markup' => $description,
     );
   }
+
+  // Construct overlay options.
+  $overlay_options = array(
+    '01' => '<span class="overlay_option overlay_01"><span/>',
+    '02' => '<span class="overlay_option overlay_02"><span/>',
+    '03' => '<span class="overlay_option overlay_03"><span/>',
+    '04' => '<span class="overlay_option overlay_04"><span/>',
+    '05' => '<span class="overlay_option overlay_05"><span/>',
+    '06' => '<span class="overlay_option overlay_06"><span/>',
+    '07' => '<span class="overlay_option overlay_07"><span/>',
+    '08' => '<span class="overlay_option overlay_08"><span/>',
+    '09' => '<span class="overlay_option overlay_09"><span/>',
+    '10' => '<span class="overlay_option overlay_10"><span/>',
+    '11' => '<span class="overlay_option overlay_11"><span/>',
+    '12' => '<span class="overlay_option overlay_12"><span/>',
+    '13' => '<span class="overlay_option overlay_13"><span/>',
+    '14' => '<span class="overlay_option overlay_14"><span/>',
+  );
 
   $form['description_field'] = array(
     '#type' => 'checkbox',
@@ -255,6 +276,14 @@ function supersized_field_instance_settings_form($field, $instance) {
   $form['functionalities']['on_new_slide'] = array(
     '#type' => 'hidden',
     '#value' => 'on_new_slide_callback',
+  );
+  $form['functionalities']['overlay'] = array(
+    '#type' => 'radios',
+    '#title' => t('Overylay'),
+    '#description' => t('To add an overlay texture to the slide images.'),
+    '#options' => $overlay_options,
+    '#default_value' => isset($settings['functionalities']['overlay']) ? $settings['functionalities']['overlay'] : supersized_default_settings('overlay'),
+    '#required' => TRUE,
   );
   $form['dimension'] = array(
     '#type' => 'fieldset',

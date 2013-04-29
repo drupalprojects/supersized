@@ -10,3 +10,57 @@ ul#thumb-list li img {
 ul#thumb-tray {
   height: 130px;
 }
+
+/* Overlay background */
+#supersized-node-settings-form #edit-overlay .form-item.form-type-radio,
+.form-item-instance-settings-functionalities-overlay .form-item.form-type-radio {
+  display: inline-block;
+  margin-right: 15px;
+}
+span.overlay_option {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+}
+span.overlay_option.overlay_01 {
+  background: url(../images/overlay_01.png) transparent repeat;
+}
+span.overlay_option.overlay_02 {
+  background: url(../images/overlay_02.png) transparent repeat;
+}
+span.overlay_option.overlay_03 {
+  background: url(../images/overlay_03.png) transparent repeat;
+}
+span.overlay_option.overlay_04 {
+  background: url(../images/overlay_04.png) transparent repeat;
+}
+span.overlay_option.overlay_05 {
+  background: url(../images/overlay_05.png) transparent repeat;
+}
+span.overlay_option.overlay_06 {
+  background: url(../images/overlay_06.png) transparent repeat;
+}
+span.overlay_option.overlay_07 {
+  background: url(../images/overlay_07.png) transparent repeat;
+}
+span.overlay_option.overlay_08 {
+  background: url(../images/overlay_08.png) transparent repeat;
+}
+span.overlay_option.overlay_09 {
+  background: url(../images/overlay_09.png) transparent repeat;
+}
+span.overlay_option.overlay_10 {
+  background: url(../images/overlay_10.png) transparent repeat;
+}
+span.overlay_option.overlay_11 {
+  background: url(../images/overlay_11.png) transparent repeat;
+}
+span.overlay_option.overlay_12 {
+  background: url(../images/overlay_12.png) transparent repeat;
+}
+span.overlay_option.overlay_13 {
+  background: url(../images/overlay_13.png) transparent repeat;
+}
+span.overlay_option.overlay_14 {
+  background: url(../images/overlay_14.png) transparent repeat;
+}

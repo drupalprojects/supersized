@@ -310,6 +310,24 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     $settings = $field['instance']['settings'];
   }
 
+  // Construct overlay options.
+  $overlay_options = array(
+    '01' => '<span class="overlay_option overlay_01"><span/>',
+    '02' => '<span class="overlay_option overlay_02"><span/>',
+    '03' => '<span class="overlay_option overlay_03"><span/>',
+    '04' => '<span class="overlay_option overlay_04"><span/>',
+    '05' => '<span class="overlay_option overlay_05"><span/>',
+    '06' => '<span class="overlay_option overlay_06"><span/>',
+    '07' => '<span class="overlay_option overlay_07"><span/>',
+    '08' => '<span class="overlay_option overlay_08"><span/>',
+    '09' => '<span class="overlay_option overlay_09"><span/>',
+    '10' => '<span class="overlay_option overlay_10"><span/>',
+    '11' => '<span class="overlay_option overlay_11"><span/>',
+    '12' => '<span class="overlay_option overlay_12"><span/>',
+    '13' => '<span class="overlay_option overlay_13"><span/>',
+    '14' => '<span class="overlay_option overlay_14"><span/>',
+  );
+
   $form = array();
   $form['nid'] = array(
     '#type' => 'hidden',
@@ -429,6 +447,14 @@ function supersized_node_settings_form($form, &$form_state, $node) {
   $form['functionalities']['on_new_slide'] = array(
     '#type' => 'hidden',
     '#value' => 'on_new_slide_callback',
+  );
+  $form['functionalities']['overlay'] = array(
+    '#type' => 'radios',
+    '#title' => t('Overylay'),
+    '#description' => t('To add an overlay texture to the slide images.'),
+    '#options' => $overlay_options,
+    '#default_value' => isset($settings['functionalities']['overlay']) ? $settings['functionalities']['overlay'] : supersized_default_settings('overlay'),
+    '#required' => TRUE,
   );
   $form['dimension'] = array(
     '#type' => 'fieldset',
