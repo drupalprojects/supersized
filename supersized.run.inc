@@ -126,6 +126,14 @@ function supersized_run($node, &$page) {
     )), 'setting'
   );
 
+  // Add overlay.
+  if (isset($settings['functionalities']['overlay']) && $settings['functionalities']['overlay'] != 'none') {
+    $page['page_bottom']['supersized']['overlay'] = array(
+      '#type' => 'markup',
+      '#markup' => '<div id="supersized-overlay" class="supersized-overlay overlay-' . $settings['functionalities']['overlay'] . '"></div>',
+    );
+  }
+
   // Add arrow navigation markup.
   if ($settings['components']['arrow_nav']) {
     $page['page_bottom']['supersized']['arrow_nav'] = array(

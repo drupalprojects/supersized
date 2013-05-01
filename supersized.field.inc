@@ -43,6 +43,7 @@ function supersized_field_info() {
           'performance' => supersized_default_settings('performance'),
           'image_protect' => supersized_default_settings('image_protect'),
           'on_new_slide' => supersized_default_settings('on_new_slide'),
+          'overlay' => supersized_default_settings('overlay'),
         ),
         'dimension' => array(
           'min_width' => supersized_default_settings('min_width'),
@@ -102,7 +103,7 @@ function supersized_default_settings($setting) {
     'mouse_scrub' => 0,
     'control_bar' => 1,
     'mobile_disabled' => 1,
-    'overlay' => NULL,
+    'overlay' => 'none',
   );
   return (isset($settings[$setting])) ? $settings[$setting] : NULL;
 }
@@ -146,20 +147,21 @@ function supersized_field_instance_settings_form($field, $instance) {
 
   // Construct overlay options.
   $overlay_options = array(
-    '01' => '<span class="overlay_option overlay_01"><span/>',
-    '02' => '<span class="overlay_option overlay_02"><span/>',
-    '03' => '<span class="overlay_option overlay_03"><span/>',
-    '04' => '<span class="overlay_option overlay_04"><span/>',
-    '05' => '<span class="overlay_option overlay_05"><span/>',
-    '06' => '<span class="overlay_option overlay_06"><span/>',
-    '07' => '<span class="overlay_option overlay_07"><span/>',
-    '08' => '<span class="overlay_option overlay_08"><span/>',
-    '09' => '<span class="overlay_option overlay_09"><span/>',
-    '10' => '<span class="overlay_option overlay_10"><span/>',
-    '11' => '<span class="overlay_option overlay_11"><span/>',
-    '12' => '<span class="overlay_option overlay_12"><span/>',
-    '13' => '<span class="overlay_option overlay_13"><span/>',
-    '14' => '<span class="overlay_option overlay_14"><span/>',
+    'none' => t('None'),
+    '01' => '<span class="supersized-overlay overlay-01"><span/>',
+    '02' => '<span class="supersized-overlay overlay-02"><span/>',
+    '03' => '<span class="supersized-overlay overlay-03"><span/>',
+    '04' => '<span class="supersized-overlay overlay-04"><span/>',
+    '05' => '<span class="supersized-overlay overlay-05"><span/>',
+    '06' => '<span class="supersized-overlay overlay-06"><span/>',
+    '07' => '<span class="supersized-overlay overlay-07"><span/>',
+    '08' => '<span class="supersized-overlay overlay-08"><span/>',
+    '09' => '<span class="supersized-overlay overlay-09"><span/>',
+    '10' => '<span class="supersized-overlay overlay-10"><span/>',
+    '11' => '<span class="supersized-overlay overlay-11"><span/>',
+    '12' => '<span class="supersized-overlay overlay-12"><span/>',
+    '13' => '<span class="supersized-overlay overlay-13"><span/>',
+    '14' => '<span class="supersized-overlay overlay-14"><span/>',
   );
 
   $form['description_field'] = array(
