@@ -145,24 +145,8 @@ function supersized_field_instance_settings_form($field, $instance) {
     );
   }
 
-  // Construct overlay options.
-  $overlay_options = array(
-    'none' => t('None'),
-    '01' => '<span class="supersized-overlay overlay-01"><span/>',
-    '02' => '<span class="supersized-overlay overlay-02"><span/>',
-    '03' => '<span class="supersized-overlay overlay-03"><span/>',
-    '04' => '<span class="supersized-overlay overlay-04"><span/>',
-    '05' => '<span class="supersized-overlay overlay-05"><span/>',
-    '06' => '<span class="supersized-overlay overlay-06"><span/>',
-    '07' => '<span class="supersized-overlay overlay-07"><span/>',
-    '08' => '<span class="supersized-overlay overlay-08"><span/>',
-    '09' => '<span class="supersized-overlay overlay-09"><span/>',
-    '10' => '<span class="supersized-overlay overlay-10"><span/>',
-    '11' => '<span class="supersized-overlay overlay-11"><span/>',
-    '12' => '<span class="supersized-overlay overlay-12"><span/>',
-    '13' => '<span class="supersized-overlay overlay-13"><span/>',
-    '14' => '<span class="supersized-overlay overlay-14"><span/>',
-  );
+  // Get overlay options.
+  $overlay_options = supersized_overlay_options();
 
   $form['description_field'] = array(
     '#type' => 'checkbox',

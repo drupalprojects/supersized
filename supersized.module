@@ -310,24 +310,8 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     $settings = $field['instance']['settings'];
   }
 
-  // Construct overlay options.
-  $overlay_options = array(
-    'none' => t('None'),
-    '01' => '<span class="supersized-overlay overlay-01"><span/>',
-    '02' => '<span class="supersized-overlay overlay-02"><span/>',
-    '03' => '<span class="supersized-overlay overlay-03"><span/>',
-    '04' => '<span class="supersized-overlay overlay-04"><span/>',
-    '05' => '<span class="supersized-overlay overlay-05"><span/>',
-    '06' => '<span class="supersized-overlay overlay-06"><span/>',
-    '07' => '<span class="supersized-overlay overlay-07"><span/>',
-    '08' => '<span class="supersized-overlay overlay-08"><span/>',
-    '09' => '<span class="supersized-overlay overlay-09"><span/>',
-    '10' => '<span class="supersized-overlay overlay-10"><span/>',
-    '11' => '<span class="supersized-overlay overlay-11"><span/>',
-    '12' => '<span class="supersized-overlay overlay-12"><span/>',
-    '13' => '<span class="supersized-overlay overlay-13"><span/>',
-    '14' => '<span class="supersized-overlay overlay-14"><span/>',
-  );
+  // Get overlay options.
+  $overlay_options = supersized_overlay_options();
 
   $form = array();
   $form['nid'] = array(
@@ -655,4 +639,104 @@ function supersized_get_node_settings($node) {
  */
 function supersized_node_settings_access($node) {
   return user_access('administer node supersized settings') && supersized_get_supersized_field($node);
+}
+
+/**
+ * Return available overlay patterns.
+ */
+function supersized_overlay() {
+  // Defaut overlay options.
+  $file_path = drupal_get_path('module', 'supersized') . '/images';
+  $overlay = array(
+    array(
+      'name' => t('Style 1'),
+      'file' => 'overlay_01.png',
+      'file path' => $file_path,
+    ),
+    array(
+      'name' => t('Style 2'),
+      'file' => 'overlay_02.png',
+      'file path' => $file_path,
+    ),
+    array(
+      'name' => t('Style 3'),
+      'file' => 'overlay_03.png',
+      'file path' => $file_path,
+    ),
+    array(
+      'name' => t('Style 4'),
+      'file' => 'overlay_04.png',
+      'file path' => $file_path,
+    ),
+    array(
+      'name' => t('Style 5'),
+      'file' => 'overlay_05.png',
+      'file path' => $file_path,
+    ),
+    array(
+      'name' => t('Style 6'),
+      'file' => 'overlay_06.png',
+      'file path' => $file_path,
+    ),
+    array(
+      'name' => t('Style 7'),
+      'file' => 'overlay_07.png',
+      'file path' => $file_path,
+    ),
+    array(
+      'name' => t('Style 8'),
+      'file' => 'overlay_08.png',
+      'file path' => $file_path,
+    ),
+    array(
+      'name' => t('Style 9'),
+      'file' => 'overlay_09.png',
+      'file path' => $file_path,
+    ),
+    array(
+      'name' => t('Style 10'),
+      'file' => 'overlay_10.png',
+      'file path' => $file_path,
+    ),
+    array(
+      'name' => t('Style 11'),
+      'file' => 'overlay_11.png',
+      'file path' => $file_path,
+    ),
+    array(
+      'name' => t('Style 12'),
+      'file' => 'overlay_12.png',
+      'file path' => $file_path,
+    ),
+    array(
+      'name' => t('Style 13'),
+      'file' => 'overlay_13.png',
+      'file path' => $file_path,
+    ),
+    array(
+      'name' => t('Style 14'),
+      'file' => 'overlay_14.png',
+      'file path' => $file_path,
+    ),
+  );
+
+  // Additional overlay options by other modules.
+  $overlay_additions = module_invoke_all('supersized_overlay');
+  foreach ($overlay_additions as $addition) {
+    $overlay = array_merge($overlay, $addition);
+  }
+  return $overlay;
+}
+
+/**
+ * Return available overlay patterns.
+ */
+function supersized_overlay_options() {
+  $options['none'] = t('None');
+  $overlays = supersized_overlay();
+  foreach ($overlays as $k => $overlay) {
+    $path = $overlay['file path'] . '/' . $overlay['file'];
+    $options[$k] = '<div class="supersized-overlay-option"><div style=""></div>' . $overlay['name'] . '</div>';
+  }
+  return $options;
 }
