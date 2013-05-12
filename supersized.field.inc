@@ -270,6 +270,7 @@ function supersized_field_instance_settings_form($field, $instance) {
     '#options' => $overlay_options,
     '#default_value' => isset($settings['functionalities']['overlay']) ? $settings['functionalities']['overlay'] : supersized_default_settings('overlay'),
     '#required' => TRUE,
+    '#process' => array('supersized_form_process_radios'),
   );
   $form['dimension'] = array(
     '#type' => 'fieldset',

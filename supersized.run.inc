@@ -130,7 +130,7 @@ function supersized_run($node, &$page) {
   if (isset($settings['functionalities']['overlay']) && $settings['functionalities']['overlay'] != 'none') {
     $page['page_bottom']['supersized']['overlay'] = array(
       '#type' => 'markup',
-      '#markup' => '<div id="supersized-overlay" class="supersized-overlay overlay-' . $settings['functionalities']['overlay'] . '"></div>',
+      '#markup' => theme('supersized_overlay', array('overlay_key' => $settings['functionalities']['overlay'])),
     );
   }
 

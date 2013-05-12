@@ -17,6 +17,11 @@ ul#thumb-tray {
   display: inline-block;
   margin-right: 15px;
 }
+.supersized-overlay-preview {
+  display: block;
+  height: 40px;
+  width: 40px;
+}
 #supersized-overlay {
   display: block;
   height: 100%;
@@ -26,9 +31,4 @@ ul#thumb-tray {
   top: 0;
   width: 100%;
   z-index: -998;
-}
-.supersized-overlay {
-  display: inline-block;
-  height: 40px;
-  width: 40px;
 }

@@ -41,6 +41,15 @@ function supersized_libraries_info() {
  */
 function supersized_theme($existing, $type, $theme, $path) {
   return array(
+    'supersized_form_element' => array(
+      'render element' => 'element',
+    ),
+    'supersized_form_element_label' => array(
+      'render element' => 'element',
+    ),
+    'supersized_overlay' => array(
+      'variables' => array('overlay_key' => NULL),
+    ),
     'supersized_arrow_nav' => array(),
     'supersized_progress_bar' => array(),
     'supersized_thumbnail_navigation' => array(),
@@ -50,6 +59,162 @@ function supersized_theme($existing, $type, $theme, $path) {
       'template' => 'supersized_control_bar',
     ),
   );
+}
+
+/**
+ * Theme function of supersized_form_element.
+ *
+ * This is an exact clone of theme_form_element, but labels theme are overiden.
+ */
+function theme_supersized_form_element($variables) {
+  $element = &$variables['element'];
+
+  // This function is invoked as theme wrapper, but the rendered form element
+  // may not necessarily have been processed by form_builder().
+  $element += array(
+    '#title_display' => 'before',
+  );
+
+  // Add element #id for #type 'item'.
+  if (isset($element['#markup']) && !empty($element['#id'])) {
+    $attributes['id'] = $element['#id'];
+  }
+  // Add element's #type and #name as class to aid with JS/CSS selectors.
+  $attributes['class'] = array('form-item');
+  if (!empty($element['#type'])) {
+    $attributes['class'][] = 'form-type-' . strtr($element['#type'], '_', '-');
+  }
+  if (!empty($element['#name'])) {
+    $attributes['class'][] = 'form-item-' . strtr($element['#name'], array(' ' => '-', '_' => '-', '[' => '-', ']' => ''));
+  }
+  // Add a class for disabled elements to facilitate cross-browser styling.
+  if (!empty($element['#attributes']['disabled'])) {
+    $attributes['class'][] = 'form-disabled';
+  }
+  $output = '<div' . drupal_attributes($attributes) . '>' . "\n";
+
+  // If #title is not set, we don't display any label or required marker.
+  if (!isset($element['#title'])) {
+    $element['#title_display'] = 'none';
+  }
+  $prefix = isset($element['#field_prefix']) ? '<span class="field-prefix">' . $element['#field_prefix'] . '</span> ' : '';
+  $suffix = isset($element['#field_suffix']) ? ' <span class="field-suffix">' . $element['#field_suffix'] . '</span>' : '';
+
+  switch ($element['#title_display']) {
+    case 'before':
+    case 'invisible':
+      $output .= ' ' . theme('supersized_form_element_label', $variables);
+      $output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
+      break;
+
+    case 'after':
+      $output .= ' ' . $prefix . $element['#children'] . $suffix;
+      $output .= ' ' . theme('supersized_form_element_label', $variables) . "\n";
+      break;
+
+    case 'none':
+    case 'attribute':
+      // Output no label and no required marker, only the children.
+      $output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
+      break;
+  }
+
+  if (!empty($element['#description'])) {
+    $output .= '<div class="description">' . $element['#description'] . "</div>\n";
+  }
+
+  $output .= "</div>\n";
+
+  return $output;
+}
+
+/**
+ * Theme function of supersized_form_element_label.
+ *
+ * This is for avoid filtering out attributes of label.
+ */
+function theme_supersized_form_element_label($variables) {
+  $element = $variables['element'];
+  // This is also used in the installer, pre-database setup.
+  $t = get_t();
+
+  // If title and required marker are both empty, output no label.
+  if ((!isset($element['#title']) || $element['#title'] === '') && empty($element['#required'])) {
+    return '';
+  }
+
+  // If the element is required, a required marker is appended to the label.
+  $required = !empty($element['#required']) ? theme('form_required_marker', array('element' => $element)) : '';
+
+  $title = $element['#title'];
+
+  $attributes = array();
+  // Style the label as class option to display inline with the element.
+  if ($element['#title_display'] == 'after') {
+    $attributes['class'] = 'option';
+  }
+  // Show label only to screen readers to avoid disruption in visual flows.
+  elseif ($element['#title_display'] == 'invisible') {
+    $attributes['class'] = 'element-invisible';
+  }
+
+  if (!empty($element['#id'])) {
+    $attributes['for'] = $element['#id'];
+  }
+
+  // The leading whitespace helps visually separate fields from inline labels.
+  return ' <label' . drupal_attributes($attributes) . '>' . $t('!title !required', array('!title' => $title, '!required' => $required)) . "</label>\n";
+}
+
+/**
+ * A radios process function.
+ *
+ * We need to customized the theme wrapper for the radio buttons so labels
+ * support full HTML.
+ */
+function supersized_form_process_radios($element) {
+  if (count($element['#options']) > 0) {
+    $weight = 0;
+    foreach ($element['#options'] as $key => $choice) {
+      // Maintain order of options as defined in #options, in case the element
+      // defines custom option sub-elements, but does not define all option
+      // sub-elements.
+      $weight += 0.001;
+
+      $element += array($key => array());
+      // Generate the parents as the autogenerator does, so we will have a
+      // unique id for each radio button.
+      $parents_for_id = array_merge($element['#parents'], array($key));
+      $element[$key] += array(
+        '#type' => 'radio',
+        '#title' => $choice,
+
+        // The key is sanitized in drupal_attributes() during output from the
+        // theme function.
+        '#return_value' => $key,
+
+        // Use default or FALSE. A value of FALSE means that the radio button is
+        // not 'checked'.
+        '#default_value' => isset($element['#default_value']) ? $element['#default_value'] : FALSE,
+        '#attributes' => $element['#attributes'],
+        '#parents' => $element['#parents'],
+        '#id' => drupal_html_id('edit-' . implode('-', $parents_for_id)),
+        '#ajax' => isset($element['#ajax']) ? $element['#ajax'] : NULL,
+        '#weight' => $weight,
+        '#theme_wrappers' => array('supersized_form_element'),
+      );
+    }
+  }
+  return $element;
+}
+
+/**
+ * Theme fuction for overlay.
+ */
+function theme_supersized_overlay($variables) {
+  $overlay = supersized_overlay($variables['overlay_key']);
+  $path = '/' . $overlay['file path'] . '/' . $overlay['file'];
+  return '<div id="supersized-overlay" style="background-image: url(' . $path . ');"></div>';
 }
 
 /**
@@ -440,6 +605,7 @@ function supersized_node_settings_form($form, &$form_state, $node) {
     '#options' => $overlay_options,
     '#default_value' => isset($settings['functionalities']['overlay']) ? $settings['functionalities']['overlay'] : supersized_default_settings('overlay'),
     '#required' => TRUE,
+    '#process' => array('supersized_form_process_radios'),
   );
   $form['dimension'] = array(
     '#type' => 'fieldset',
@@ -644,7 +810,7 @@ function supersized_node_settings_access($node) {
 /**
  * Return available overlay patterns.
  */
-function supersized_overlay() {
+function supersized_overlay($overlay_key = NULL) {
   // Defaut overlay options.
   $file_path = drupal_get_path('module', 'supersized') . '/images';
   $overlay = array(
@@ -725,6 +891,11 @@ function supersized_overlay() {
   foreach ($overlay_additions as $addition) {
     $overlay = array_merge($overlay, $addition);
   }
+
+  // Return specify overlay info.
+  if ($overlay_key !== NULL) {
+    return $overlay[$overlay_key];
+  }
   return $overlay;
 }
 
@@ -735,8 +906,8 @@ function supersized_overlay_options() {
   $options['none'] = t('None');
   $overlays = supersized_overlay();
   foreach ($overlays as $k => $overlay) {
-    $path = $overlay['file path'] . '/' . $overlay['file'];
-    $options[$k] = '<div class="supersized-overlay-option"><div style=""></div>' . $overlay['name'] . '</div>';
+    $path = '/' . $overlay['file path'] . '/' . $overlay['file'];
+    $options[$k] = '<div class="supersized-overlay-option"><div class="supersized-overlay-preview" style="background: url(' . $path . ') transparent repeat;"></div>' . $overlay['name'] . '</div>';
   }
   return $options;
 }
