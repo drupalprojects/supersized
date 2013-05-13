@@ -11,6 +11,7 @@ CONTENTS OF THIS FILE
  * Themes
  * After slide JS callback
  * Hooks
+ * Notes
 
 AUTHOR
 ------
@@ -144,3 +145,13 @@ function YOURMODULE_supersized_overlay() {
     ),
   );
 }
+
+NOTES
+-----
+1. Some users has report that html, and body has to be 100%, otherwise scrollbar
+   will be randomly appear and disappear.  This is somehow depends depends on
+   your theme.  You may set this in case you are having the same problem.
+   (http://drupal.org/node/1974030#comment-7405596)
+
+2. Issue about stretching image to fit whole screen.
+   (http://drupal.org/node/1978216)
