@@ -9,6 +9,8 @@ CONTENTS OF THIS FILE
  * Installation
  * Context
  * Themes
+ * After slide JS callback
+ * Hooks
 
 AUTHOR
 ------
@@ -79,6 +81,7 @@ would be Supersized: a chosen node.
 THEMES
 ------
 Theme functions as follow:
+theme_supersized_overlay()
 theme_supersized_arrow_nav()
 theme_supersized_progress_bar()
 theme_supersized_thumbnail_navigation()
@@ -103,4 +106,41 @@ function am_billboard_slide_callback() {
   var title = api.getField('title');
   var body = api.getField('body');
   // Do something with the slide title and body...
+}
+
+HOOKS
+-----
+hook_supersized_overlay()
+This is for adding custom overlay pattern.  Define
+YOURMODULE_supersized_overlay() in your module, and this hook should return the
+an array such as
+
+return array(
+  'your_style_01' => array(
+    'name' => t('Your Style 1'),
+    'file' => 'filename of image',
+    'file path' => 'path to image',
+  ),
+  'your_style_02' => array(
+    'name' => t('Your Style 2'),
+    'file' => 'filename of image',
+    'file path' => 'path to image',
+  ),
+);
+
+For example:
+function YOURMODULE_supersized_overlay() {
+  $file_path = module_get_path('module', 'YOURMODULE');
+  return array(
+    'YOURMODULE_1' => array(
+      'name' => t('YOURMODULE 1'),
+      'file' => 'overlay_01.png',
+      'file path' => $file_path,
+    ),
+    'YOURMODULE_2' => array(
+      'name' => t('YOURMODULE 2'),
+      'file' => 'overlay_01.png',
+      'file path' => $file_path,
+    ),
+  );
 }
