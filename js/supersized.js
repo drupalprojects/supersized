@@ -6,7 +6,13 @@ jQuery(function($){
       var overlay = $('#supersized-overlay');
       overlay.css('cursor', 'pointer');
       overlay.unbind('click').bind('click', function(){
-        window.location = url;
+        var new_window = parseInt(Drupal.settings.supersized.new_window);
+        if (new_window) {
+          window.open(url);
+        }
+        else {
+          window.location = url;
+        }
         return false;
       });
     }
