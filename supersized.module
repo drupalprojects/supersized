@@ -974,7 +974,7 @@ function supersized_overlay_options() {
   $options['none'] = t('None');
   $overlays = supersized_overlay();
   foreach ($overlays as $k => $overlay) {
-    $path = '/' . $overlay['file path'] . '/' . $overlay['file'];
+    $path = url($overlay['file path'] . '/' . $overlay['file']);
     $options[$k] = '<div class="supersized-overlay-option"><div class="supersized-overlay-preview" style="background: url(' . $path . ') transparent repeat;"></div>' . $overlay['name'] . '</div>';
   }
   return $options;
