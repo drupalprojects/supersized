@@ -378,8 +378,13 @@ function supersized_page_alter(&$page) {
   $node = NULL;
   $plugin = NULL;
 
-  // Try to see if there's any supersized set by context.
   if (module_exists('context')) {
+    // Check disable context reaction.
+    $plugin = context_get_plugin('reaction', 'supersized_disable_context');
+    if (is_object($plugin) && $plugin->execute()) {
+      return;
+    }
+    // Try to see if there's any supersized set by context.
     $plugin = context_get_plugin('reaction', 'supersized_context');
     if (is_object($plugin)) {
       $node = node_load($plugin->execute());
