@@ -252,8 +252,14 @@ function template_preprocess_supersized_control_bar(&$variables) {
 
   $library = libraries_load('supersized');
 
+  // Image path.
+  $image_path = $GLOBALS['base_path'] . $library['library path'] . '/slideshow/img';
+  if (is_dir(path_to_theme() . '/images/supersized')) {
+    $image_path = $GLOBALS['base_path'] . path_to_theme() . '/images/supersized';
+  }
+
   // Create play/puase button.
-  $pause_path = $library['library path'] . '/slideshow/img/pause.png';
+  $pause_path = $image_path . '/pause.png';
   $pause_attr = array('id' => 'pauseplay');
   $pause_image = theme('image', array('path' => $pause_path, 'attributes' => $pause_attr));
   $options = array(
@@ -265,7 +271,7 @@ function template_preprocess_supersized_control_bar(&$variables) {
   $variables['pause_link'] = l($pause_image, '', $options);
 
   // Create tray trigger button.
-  $tray_button_path = $library['library path'] . '/slideshow/img/button-tray-up.png';
+  $tray_button_path = $image_path . '/button-tray-up.png';
   $tray_button_attr = array('id' => 'tray-arrow');
   $tray_button_image = theme('image', array('path' => $tray_button_path, 'attributes' => $tray_button_attr));
   $options = array(

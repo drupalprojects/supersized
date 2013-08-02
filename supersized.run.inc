@@ -86,9 +86,9 @@ function supersized_run($node, &$page) {
   }
 
   // Image path.
-  $image_path = '/' . $library['library path'] . '/slideshow/img/';
+  $image_path = $GLOBALS['base_path'] . $library['library path'] . '/slideshow/img/';
   if (is_dir(path_to_theme() . '/images/supersized')) {
-    $image_path = '/' . path_to_theme() . '/images/supersized/';
+    $image_path = $GLOBALS['base_path'] . path_to_theme() . '/images/supersized/';
   }
 
   // Add neccessary JS and CSS files.
