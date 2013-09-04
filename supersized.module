@@ -213,7 +213,8 @@ function supersized_form_process_radios($element) {
  */
 function theme_supersized_overlay($variables) {
   $overlay = supersized_overlay($variables['overlay_key']);
-  $path = url($overlay['file path'] . '/' . $overlay['file']);
+  kpr($overlay);
+  $path = '/' . $overlay['file path'] . '/' . $overlay['file'];
   return '<div id="supersized-overlay" style="background-image: url(' . $path . ');"></div>';
 }
 
