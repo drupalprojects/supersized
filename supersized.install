@@ -99,10 +99,11 @@ function supersized_requirements($phase) {
   // Ensure translations don't break during installation.
   $t = get_t();
 
-  // Test supersized JQuery plugin.
-  $library = libraries_detect('supersized');
-
   if ($phase === 'runtime') {
+
+    // Test supersized JQuery plugin.
+    $library = libraries_detect('supersized');
+
     if (!empty($library)) {
       $requirements['supersized'] = array(
         'title' => $t('Supersized'),
